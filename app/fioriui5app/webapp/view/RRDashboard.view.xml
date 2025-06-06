@@ -1,0 +1,333 @@
+<mvc:XMLView
+    xmlns:form="sap.ui.layout.form"
+    controllerName="fioriui5app.controller.RRDashboard"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:l="sap.ui.layout"
+    displayBlock="true"
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:u="sap.ui.unified"
+    xmlns:commons="sap.suite.ui.commons"
+    class="d-flex justify-content-center"
+>
+    <Page
+        id="rrd"
+        title="{i18n>rrdashboard}"
+        showNavButton="false"
+        navButtonPress="onPressOfEntryFormCancelButton"
+    >
+        <form:SimpleForm>
+            <form:content>
+                <VBox
+                    height="100%"
+                    fitContainer="true"
+                >
+                    <HBox
+                        width="100%"
+                        justifyContent="SpaceAround"
+                    >
+                        <VBox>
+                            <Label
+                                text="{i18n>invoicedate}"
+                                class="sapUiTinyMarginBottom"
+                            />
+                            <HBox
+                                width="100%"
+                                justifyContent="SpaceBetween"
+                            >
+                                <DatePicker
+                                    id="invoiceStartDate"
+                                    value="{EntryFormDataSourceModel>/invoicefromdate}"
+                                    displayFormat="dd-MM-yyyy"
+                                    valueFormat="dd-MM-yyyy"
+                                    change="handleInvoiceFromDateChange"
+                                    placeholder="From"
+                                    class="sapUiTinyMarginEnd sapUiTinyMarginBottom"
+                                />
+                                <DatePicker
+                                    id="invoiceEndDate"
+                                    value="{EntryFormDataSourceModel>/invoicetodate}"
+                                    displayFormat="dd-MM-yyyy"
+                                    valueFormat="dd-MM-yyyy"
+                                    change="handleInvoiceToDateChange"
+                                    placeholder="To"
+                                    class="sapUiTinyMarginBegin sapUiTinyMarginBottom"
+                                />
+                            </HBox>
+                        </VBox>
+
+                        <VBox>
+                            <Label
+                                text="{i18n>customer}"
+                                class="sapUiTinyMarginBottom"
+                                required="true"
+                            />
+                            <HBox
+                                width="100%"
+                                justifyContent="SpaceBetween"
+                            >
+                                <Input
+                                    id="customer"
+                                    type="Text"
+                                    value="{EntryFormDataSourceModel>/customername}"
+                                    placeholder="Customer Name"
+                                    showValueHelp="true"
+                                    valueHelpRequest="cflForCustomer"
+                                    liveChange="onLiveChange"
+                                    class="sapUiTinyMarginEnd sapUiTinyMarginBottom"
+                                />
+                                <Input
+                                    id="inptCustomerCode"
+                                    type="Text"
+                                    value="{EntryFormDataSourceModel>/customercode}"
+                                    placeholder="Customer Code"
+                                    editable="false"
+                                    class="sapUiTinyMarginBegin sapUiTinyMarginBottom"
+                                />
+                            </HBox>
+                        </VBox>
+
+                        <VBox>
+                            <Label
+                                text="{i18n>salesorder}"
+                                class="sapUiTinyMarginBottom"
+                                required="true"
+                            />
+                            <HBox
+                                width="100%"
+                                justifyContent="SpaceBetween"
+                            >
+                                <Input
+                                    id="SalesOrderr"
+                                    type="Text"
+                                    value="{EntryFormDataSourceModel>/salesorder}"
+                                    placeholder="Sales Order"
+                                    showValueHelp="true"
+                                    valueHelpRequest="cflForSalesOrder"
+                                    required="true"
+                                    liveChange="onLiveChange"
+                                    class="sapUiTinyMarginBottom"
+                                />
+                            </HBox>
+                        </VBox>
+                    </HBox>
+                    <HBox justifyContent="Center">
+                        <Button
+                            type="Emphasized"
+                            text="{i18n>btnFetchData}"
+                            press="onBtnFetchDataAction"
+                            class="sapUiTinyMargin"
+                        />
+                        <Button
+                            type="Emphasized"
+                            text="{i18n>btnReset}"
+                            press="onBtnResetAction"
+                            class="sapUiTinyMargin"
+                        />
+                    </HBox>
+
+                    <!-- <form:SimpleForm
+                            columnsM="3"
+                            columnsL="4"
+                            columnsXL="5"
+                            editable="true"
+                            layout="ColumnLayout"
+                        >
+                            <form:content>
+                                <Label text="{i18n>invoicedate}" />
+                                <DatePicker
+                                    id="invoiceStartDatee"
+                                    value="{EntryFormDataSourceModel>/tah_startdate}"
+                                    displayFormat="dd-MM-yyyy"
+                                    valueFormat="dd-MM-yyyy"
+                                    change="handleInvoiceStartDateChange"
+                                    placeholder="From"
+                                />
+                                <DatePicker
+                                    id="invoiceEndDatee"
+                                    value="{EntryFormDataSourceModel>/tah_startdate}"
+                                    displayFormat="dd-MM-yyyy"
+                                    valueFormat="dd-MM-yyyy"
+                                    change="handleInvoiceEndDateChange"
+                                    placeholder="To"
+                                />
+
+                                <Label text="{i18n>customer}" />
+                                <Input
+                                    id="customerr"
+                                    type="Text"
+                                    value="{EntryFormDataSourceModel>/tah_prjtemplnme}"
+                                    placeholder="Customer"
+                                    showValueHelp="true"
+                                    valueHelpRequest="cflForCustomers"
+                                    required="true"
+                                    liveChange="onLiveChange"
+                                />
+                                <Input
+                                    id="SO_DATE_DIFF_EntryFormm"
+                                    type="Text"
+                                    value="{EntryFormDataSourceModel>/sodatediff}"
+                                    placeholder="SO DATE DIFFERENCE"
+                                    editable="false"
+                                />
+                                <Label text="{i18n>salesorder}" />
+                                <Input
+                                    id="SalesOrder"
+                                    type="Text"
+                                    value="{EntryFormDataSourceModel>/tah_sono}"
+                                    placeholder="Sales Order"
+                                    showValueHelp="true"
+                                    valueHelpRequest="cflForSoNo"
+                                    required="true"
+                                    liveChange="onLiveChange"
+                                />
+                            </form:content>
+                        </form:SimpleForm> -->
+
+                    <form:SimpleForm>
+                        <form:content>
+                            <ScrollContainer
+                                id="scrollContainerRRD"
+                                width="100%"
+                                height="auto"
+                                horizontal="true"
+                                vertical="true"
+                                class="sapUiTinyMarginBottom sapUiSmallMarginTop"
+                            >
+                                <Table
+                                    id="RRDTable_EntryForm"
+                                    items="{ path: 'EntryFormDataSourceModel>/value'}"
+                                    sticky="ColumnHeaders,HeaderToolbar"
+                                    growing="true"
+                                    growingThreshold="20"
+                                    growingScrollToLoad="true"
+                                >
+                                    <headerToolbar />
+                                    <columns>
+                                        <Column width="30px">
+                                            <header>
+                                                <Label text="{i18n>srno}" />
+                                            </header>
+                                        </Column>
+                                        <Column width="60px">
+                                            <header>
+                                                <Label
+                                                    text="{i18n>salesorder}"
+                                                />
+                                            </header>
+                                        </Column>
+
+                                        <Column width="60px">
+                                            <header>
+                                                <Label
+                                                    text="{i18n>billingdocument}"
+                                                />
+                                            </header>
+                                        </Column>
+                                        <Column width="50px">
+                                            <header>
+                                                <Label
+                                                    text="{i18n>billingdate}"
+                                                    wrapping="true"
+                                                />
+                                            </header>
+                                        </Column>
+
+                                        <Column width="50px">
+                                            <header>
+                                                <Label
+                                                    text="{i18n>billingvalue}"
+                                                    wrapping="true"
+                                                />
+                                            </header>
+                                        </Column>
+                                        <Column width="60px">
+                                            <header>
+                                                <Label
+                                                    text="{i18n>period}"
+                                                    wrapping="true"
+                                                />
+                                            </header>
+                                        </Column>
+                                        <Column width="60px">
+                                            <header>
+                                                <Label
+                                                    text="{i18n>proposedrr}"
+                                                    wrapping="true"
+                                                />
+                                            </header>
+                                        </Column>
+                                    </columns>
+                                    <items>
+                                        <ColumnListItem vAlign="Middle">
+                                            <cells>
+                                                <Text
+                                                    text="{EntryFormDataSourceModel>RowNumber}"
+                                                    wrapping="true"
+                                                />
+
+                                                <Text
+                                                    text="{EntryFormDataSourceModel>SalesOrder}"
+                                                    wrapping="true"
+                                                />
+
+                                                <Text
+                                                    text="{EntryFormDataSourceModel>BillingDocument}"
+                                                    wrapping="true"
+                                                />
+                                                <Text
+                                                    text="{EntryFormDataSourceModel>BillingDate}"
+                                                    wrapping="true"
+                                                />
+                                                <Text
+                                                    text="{EntryFormDataSourceModel>BillValue}"
+                                                    wrapping="true"
+                                                />
+                                                <Input
+                                                    id="inptPeriod"
+                                                    type="Number"
+                                                    value="{EntryFormDataSourceModel>Period}"
+                                                    placeholder="Period"
+                                                />
+                                                <Input
+                                                    id="inptproposedrr"
+                                                    type="Number"
+                                                    value="{EntryFormDataSourceModel>RRAmount}"
+                                                    placeholder="Proposed RR"
+                                                />
+                                            </cells>
+                                        </ColumnListItem>
+                                    </items>
+                                </Table>
+                            </ScrollContainer>
+                        </form:content>
+                    </form:SimpleForm>
+
+                    <HBox
+                        width="100%"
+                        justifyContent="Center"
+                    >
+                        <Button
+                            id="btnExecute"
+                            type="Emphasized"
+                            text="{i18n>btnexecute}"
+                            press="onBtnExecutionAction"
+                        />
+                    </HBox>
+                </VBox>
+            </form:content>
+        </form:SimpleForm>
+        <footer>
+            <Toolbar>
+                <ToolbarSpacer />
+                <FlexBox justifyContent="End">
+                    <!-- <Button
+                        type="Emphasized"
+                        text="{i18n>SAVE}"
+                        press="onSave"
+                    /> -->
+                </FlexBox>
+            </Toolbar>
+        </footer>
+    </Page>
+</mvc:XMLView>

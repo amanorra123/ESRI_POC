@@ -1,0 +1,49 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    controllerName="fioriui5app.controller.ValueHelpDialog"
+>
+    <TableSelectDialog
+        id="tableSelectDialog"
+        noDataText="No Data Found"
+        title="List"
+        search=".onVHSearch"
+        searchPlaceholder="Search"
+        confirm=".onVHConfirm"
+        cancel=".onVHCancel"
+        items="{
+			path : 'vhdModel>value'
+		}"
+    >
+        <columns>
+            <Column width="12em">
+                <header>
+                    <Text text="Code" />
+                </header>
+            </Column>
+            <Column width="12em">
+                <header>
+                    <Text text="Name" />
+                </header>
+            </Column>
+        </columns>
+        <ColumnListItem >
+            <cells>
+                <Text text="{vhdModel>id}" />
+                <Text text="{vhdModel>name}" />
+            </cells>
+        </ColumnListItem>
+        <!-- <columns>
+            <Column width="12em">
+                <header>
+                    <Text text="{vhdModel>id}" />
+                </header>
+            </Column>
+            <Column width="12em">
+                <header>
+                    <Text text="{vhdModel>name}" />
+                </header>
+            </Column>
+        </columns> -->
+    </TableSelectDialog>
+</core:FragmentDefinition>

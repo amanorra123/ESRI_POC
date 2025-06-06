@@ -1,0 +1,22 @@
+{
+    "showTable":false,
+    "showButton":false,
+    "invoicefromdate":"",
+    "invoicetodate":"",
+    "customercode":"",
+    "customername":"",
+    "salesorder":"",
+    "value":[
+        {
+            "RowNumber":null,
+            "BillingDocument": null,
+            "SalesOrder": null,
+            "BillingDate": null,
+            "Customer": null,
+            "BillValue": null,
+            "Currency": null,
+            "RRAmount": null,
+            "Period": null
+        }
+    ]
+}

@@ -1,0 +1,37 @@
+{
+  "userDetails": {
+    "username": "",
+    "password": ""
+  },
+  "loginInfo": {
+    "UserID": "",
+    "Username": "",
+    "Usercode": "",
+    "DepartmentCode": "",
+    "DepartmentName": "",
+    "IsActive": "",
+    "FirstName": "",
+    "LastName": "",
+    "EmailId": "",
+    "EmployeeCode": null,
+    "UserGroupID_UserGroupId": null    
+  },
+  "roleDetails": {
+    "RoleCode": "",
+    "RoleName": "",
+    "UserID": ""
+  },
+  "security": {
+    "sessionId": "",
+    "accessToken": ""
+  },
+  "route": {
+    "forwardRoute": "",
+    "backwardRoute": "",
+    "routeData": {
+      "formMode": "",
+      "uniqueId": ""
+    }
+  },
+  "customData": {}
+}
