@@ -60,7 +60,6 @@
                             <Label
                                 text="{i18n>customer}"
                                 class="sapUiTinyMarginBottom"
-                                required="true"
                             />
                             <HBox
                                 width="100%"
@@ -91,7 +90,6 @@
                             <Label
                                 text="{i18n>salesorder}"
                                 class="sapUiTinyMarginBottom"
-                                required="true"
                             />
                             <HBox
                                 width="100%"
@@ -241,7 +239,7 @@
                                                 />
                                             </header>
                                         </Column>
-                                        <Column width="60px">
+                                        <Column width="40px">
                                             <header>
                                                 <Label
                                                     text="{i18n>period}"
@@ -253,6 +251,30 @@
                                             <header>
                                                 <Label
                                                     text="{i18n>proposedrr}"
+                                                    wrapping="true"
+                                                />
+                                            </header>
+                                        </Column>
+                                        <Column width="60px">
+                                            <header>
+                                                <Label
+                                                    text="{i18n>rramount}"
+                                                    wrapping="true"
+                                                />
+                                            </header>
+                                        </Column>
+                                        <Column width="50px">
+                                            <header>
+                                                <Label
+                                                    text="{i18n>proposedrrjv}"
+                                                    wrapping="true"
+                                                />
+                                            </header>
+                                        </Column>
+                                        <Column width="60px">
+                                            <header>
+                                                <Label
+                                                    text="{i18n>unbilledreversejv}"
                                                     wrapping="true"
                                                 />
                                             </header>
@@ -288,12 +310,31 @@
                                                     type="Number"
                                                     value="{EntryFormDataSourceModel>Period}"
                                                     placeholder="Period"
+                                                    editable="{EntryFormDataSourceModel>EnablePeriod}"
+                                                    liveChange="onChangePeriod"
                                                 />
                                                 <Input
                                                     id="inptproposedrr"
                                                     type="Number"
                                                     value="{EntryFormDataSourceModel>RRAmount}"
                                                     placeholder="Proposed RR"
+                                                    editable="{EntryFormDataSourceModel>EnableRRAmount}"
+                                                    liveChange="onChangeProposedRR"
+                                                />
+                                                <Input
+                                                    id="inptrramount"
+                                                    type="Number"
+                                                    value="{EntryFormDataSourceModel>AmountOfRR}"
+                                                    placeholder="Proposed RR"
+                                                    editable="false"
+                                                />
+                                                <Text
+                                                    text="{EntryFormDataSourceModel>ProposedJV}"
+                                                    wrapping="true"
+                                                />
+                                                <Text
+                                                    text="{EntryFormDataSourceModel>UnbilledJV}"
+                                                    wrapping="true"
                                                 />
                                             </cells>
                                         </ColumnListItem>

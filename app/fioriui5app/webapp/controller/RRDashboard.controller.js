@@ -4,8 +4,9 @@ sap.ui.define([
   'sap/m/MessageToast',
   '../core/generic/genericentryform',
   'fioriui5app/model/formatter',
+  "sap/ui/core/BusyIndicator"
 
-], (Controller, JSONModel, MessageToast, genericentryform, formatter) => {
+], (Controller, JSONModel, MessageToast, genericentryform, formatter, BusyIndicator) => {
   "use strict";
 
   return genericentryform.extend('fioriui5app.controller.RRDashboard', {
@@ -105,19 +106,18 @@ sap.ui.define([
       let sCustomerName = oModel1.getProperty("/customername");
       let sSalesOrder = oModel1.getProperty("/salesorder");
 
-      if (sCustomerName === undefined || sCustomerName === null || sCustomerName === "") {
-        MessageToast.show("Please select Customer");
-        isValid = false;
-      } else if (sSalesOrder === undefined || sSalesOrder === null || sSalesOrder === "") {
-        MessageToast.show("Please select Sales Order");
-        isValid = false;
-      }
+      // if (sCustomerName === undefined || sCustomerName === null || sCustomerName === "") {
+      //   MessageToast.show("Please select Customer");
+      //   isValid = false;
+      // } else if (sSalesOrder === undefined || sSalesOrder === null || sSalesOrder === "") {
+      //   MessageToast.show("Please select Sales Order");
+      //   isValid = false;
+      // }
       return isValid;
     },
 
     onBtnFetchDataAction: async function (oEvent) {
-     if (this.validate())
-      {
+      if (this.validate()) {
         this.byId("RRDTable_EntryForm").setVisible(true);
 
         let oModel = this.getView().getModel(this.getEntryFormDataSourceModelName());
@@ -125,7 +125,7 @@ sap.ui.define([
 
         let filter = "";
 
-        if (oData["invoicefromdate"] !== undefined && oData["invoicetodate"] !== undefined) {
+        if ((oData["invoicefromdate"] !== undefined && oData["invoicefromdate"] !== null) && (oData["invoicetodate"] !== undefined && oData["invoicetodate"] !== null)) {
           let dtFormattedFrom = formatter.convertDateFormatToYYYYMMDD(oData["invoicefromdate"]);
           let dtFormattedTo = formatter.convertDateFormatToYYYYMMDD(oData["invoicetodate"]);
           if (filter.length === 0) {
@@ -133,14 +133,14 @@ sap.ui.define([
           } else {
             filter = filter + ' and ' + `BillingDate ge '${dtFormattedFrom}' and BillingDate le '${dtFormattedTo}'`;
           }
-        } else if (oData["invoicefromdate"] !== undefined) {
+        } else if (oData["invoicefromdate"] !== undefined && oData["invoicefromdate"] !== null) {
           let dtFormattedFrom = formatter.convertDateFormatToYYYYMMDD(oData["invoicefromdate"]);
           if (filter.length === 0) {
             filter = `BillingDate eq '${dtFormattedFrom}'`;
           } else {
             filter = filter + ' and ' + `BillingDate eq '${dtFormattedFrom}'`;
           }
-        } else if (oData["invoicetodate"] !== undefined) {
+        } else if (oData["invoicetodate"] !== undefined && oData["invoicetodate"] !== null) {
           let dtFormattedTo = formatter.convertDateFormatToYYYYMMDD(oData["invoicetodate"]);
           if (filter.length === 0) {
             filter = `BillingDate eq  '${dtFormattedTo}'`;
@@ -148,14 +148,14 @@ sap.ui.define([
             filter = filter + ' and ' + `BillingDate eq '${dtFormattedTo}'`;
           }
         }
-        if (oData["customercode"] !== undefined) {
+        if (oData["customercode"] !== undefined && oData["customercode"] !== null) {
           if (filter.length === 0) {
             filter = `Customer eq '${oData["customercode"]}'`;
           } else {
             filter = filter + ' and ' + `Customer eq '${oData["customercode"]}'`;
           }
         }
-        if (oData["salesorder"] !== undefined) {
+        if (oData["salesorder"] !== undefined && oData["salesorder"] !== null) {
           if (filter.length === 0) {
             filter = `SalesOrder eq  '${oData["salesorder"]}'`;
           } else {
@@ -176,10 +176,27 @@ sap.ui.define([
         );
 
         let aTableData = this.getView().getModel('tblListModel').getData();
-        if (aTableData.value.length > 0) {
+        if (aTableData.value !== undefined && aTableData.value.length > 0) {
           aTableData.value.forEach((item, index) => {
             item.RowNumber = index + 1; // Start row numbering from 1
             item.BillingDate = formatter.convertDateFormatToDDMMYYYY(item.BillingDate);
+            if ((item.ProposedJV !== "" && item.ProposedJV !== null) && (item.UnbilledJV !== "" && item.UnbilledJV !== null)) {
+              item.EnableRRAmount = false;
+              item.EnablePeriod = false;
+            } else {
+              item.EnableRRAmount = true;
+              item.EnablePeriod = true;
+            }
+
+            let ProposedRR = item.RRAmount;
+            let Periods = item.Period;
+
+            if (Periods > 0 && ProposedRR > 0) {
+              let RRAmount = ProposedRR / Periods;
+              item.AmountOfRR = RRAmount;
+            } else {
+              item.AmountOfRR = 0;
+            }
           });
           this.byId("btnExecute").setVisible(true);
           oModel.setProperty('/value', aTableData['value']);
@@ -202,8 +219,50 @@ sap.ui.define([
       this.byId("btnExecute").setVisible(false);
     },
 
-    onBtnExecutionAction: function (oEvent) {
+    onChangePeriod: function (oEvent) {
+      this.calculateRRAmount(oEvent, 'period');
+    },
 
+    onChangeProposedRR: function (oEvent) {
+      this.calculateRRAmount(oEvent, 'proposedrr');
+    },
+
+    calculateRRAmount: function (oEvent, from) {
+
+      var oInput = oEvent.getSource();                         // the Input field
+      var oRow = oInput.getParent();                           // get the row (e.g., ColumnListItem)
+      var oTable = this.byId("RRDTable_EntryForm");                     // your table ID
+      var aItems = oTable.getItems();                          // all rows
+      var iIndex = aItems.indexOf(oRow);                       // index of the row
+
+      var sValue = oEvent.getParameter("value");
+      let oModel = this.getView().getModel(this.getEntryFormDataSourceModelName());
+      let oData = oModel.getData();
+      let finalCal, Period, ProposedAmount;
+      if (from === 'period') {
+        Period = Number(sValue);
+        ProposedAmount = Number(oData.value[iIndex].RRAmount);
+      } else if (from === 'proposedrr') {
+        ProposedAmount = Number(sValue);
+        Period = Number(oData.value[iIndex].Period);
+      }
+      if (ProposedAmount > 0 && Period > 0) {
+        finalCal = ProposedAmount / Period;
+      } else {
+        finalCal = 0;
+      }
+
+      oData.value[iIndex].AmountOfRR = finalCal;
+      oModel.setData(oData);
+      this.getView().setModel(oModel,this.getEntryFormDataSourceModelName());
+    },
+
+    onBtnExecutionAction: function (oEvent) {
+      BusyIndicator.show(0);
+
+      setTimeout(() => {
+        BusyIndicator.hide();
+      }, 15000);
     },
 
     handleInvoiceFromDateChange: function () {

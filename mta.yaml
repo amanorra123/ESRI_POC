@@ -1,7 +1,7 @@
 _schema-version: 3.3.0
 ID: esri_poc
 description: A simple CAP project.
-version: 1.0.2
+version: 1.0.4
 modules:
   - name: esri_poc-srv
     type: nodejs

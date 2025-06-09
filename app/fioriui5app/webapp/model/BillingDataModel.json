@@ -16,7 +16,12 @@
             "BillValue": null,
             "Currency": null,
             "RRAmount": null,
-            "Period": null
+            "Period": null,
+            "AmountOfRR":null,
+            "ProposedJV":null,
+            "UnbilledJV":null,
+            "EnableRRAmount":null,
+            "EnablePeriod":null
         }
     ]
 }
