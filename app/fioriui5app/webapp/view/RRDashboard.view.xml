@@ -377,7 +377,7 @@
                                                 <Input
                                                     id="differedrevenuejvamount"
                                                     type="Number"
-                                                    value="{EntryFormDataSourceModel>AmountOfRR}"
+                                                    value="{EntryFormDataSourceModel>ProposedJVAmount}"
                                                     placeholder="Differed Revenue JV Amount"
                                                     editable="false"
                                                 />
@@ -389,26 +389,26 @@
                                                 <Input
                                                     id="unbilledrevenuejvamount"
                                                     type="Number"
-                                                    value="{EntryFormDataSourceModel>AmountOfRR}"
+                                                    value="{EntryFormDataSourceModel>UnbilledJVAmount}"
                                                     placeholder="Unbilled Revenue JV Amount"
                                                     editable="false"
                                                 />
                                                 <Text
                                                 id="unbilledreversejv"
-                                                    text="{EntryFormDataSourceModel>UnbilledJV}"
+                                                    text="{EntryFormDataSourceModel>UnbilledReverseJV}"
                                                     wrapping="true"
                                                 />
                                                 <Input
                                                     id="unbilledreversejvamount"
                                                     type="Number"
-                                                    value="{EntryFormDataSourceModel>AmountOfRR}"
+                                                    value="{EntryFormDataSourceModel>UnbilledReverseJVAmount}"
                                                     placeholder="Unbilled Reverse JV Amount"
                                                     editable="false"
                                                 />
                                                 <Input
                                                     id="rramount"
                                                     type="Number"
-                                                    value="{EntryFormDataSourceModel>AmountOfRR}"
+                                                    value="{EntryFormDataSourceModel>RRAmount_Final}"
                                                     placeholder="RR Amount"
                                                     editable="false"
                                                 />
