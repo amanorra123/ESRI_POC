@@ -24,6 +24,15 @@ sap.ui.define([
       this.initialize();
       //this.setEntryFormDataSourceURLForEditMode('');
       await this.showEntryForm();
+
+      const oScrollContainer = this.getView().byId('scrollContainerRRD');
+      const oDomRef = oScrollContainer.getDomRef();
+      if (oDomRef) {
+        // Apply min and max height dynamically
+        oDomRef.style.minHeight = 'auto';
+        oDomRef.style.maxHeight = '450px';
+        oDomRef.style.overflow = 'auto'; // Ensure scrolling
+      }
     },
 
     initialize: async function () {
@@ -180,13 +189,13 @@ sap.ui.define([
           aTableData.value.forEach((item, index) => {
             item.RowNumber = index + 1; // Start row numbering from 1
             item.BillingDate = formatter.convertDateFormatToDDMMYYYY(item.BillingDate);
-            if ((item.ProposedJV !== "" && item.ProposedJV !== null) && (item.UnbilledJV !== "" && item.UnbilledJV !== null)) {
-              item.EnableRRAmount = false;
-              item.EnablePeriod = false;
-            } else {
-              item.EnableRRAmount = true;
-              item.EnablePeriod = true;
-            }
+            // if ((item.ProposedJV !== "" && item.ProposedJV !== null) && (item.UnbilledJV !== "" && item.UnbilledJV !== null)) {
+            //   item.EnableRRAmount = false;
+            //   item.EnablePeriod = false;
+            // } else {
+            //   item.EnableRRAmount = true;
+            //   item.EnablePeriod = true;
+            // }
 
             let ProposedRR = item.RRAmount;
             let Periods = item.Period;
@@ -254,7 +263,7 @@ sap.ui.define([
 
       oData.value[iIndex].AmountOfRR = finalCal;
       oModel.setData(oData);
-      this.getView().setModel(oModel,this.getEntryFormDataSourceModelName());
+      this.getView().setModel(oModel, this.getEntryFormDataSourceModelName());
     },
 
     onBtnExecutionAction: function (oEvent) {

@@ -12,7 +12,7 @@
 >
     <Page
         id="rrd"
-        title="{i18n>rrdashboard}"
+        title="{i18n>drdashboard}"
         showNavButton="false"
         navButtonPress="onPressOfEntryFormCancelButton"
     >
@@ -28,7 +28,7 @@
                     >
                         <VBox>
                             <Label
-                                text="{i18n>invoicedate}"
+                                text="{i18n>invoicedate}:"
                                 class="sapUiTinyMarginBottom"
                             />
                             <HBox
@@ -58,7 +58,7 @@
 
                         <VBox>
                             <Label
-                                text="{i18n>customer}"
+                                text="{i18n>customer}:"
                                 class="sapUiTinyMarginBottom"
                             />
                             <HBox
@@ -88,7 +88,7 @@
 
                         <VBox>
                             <Label
-                                text="{i18n>salesorder}"
+                                text="{i18n>salesorder}:"
                                 class="sapUiTinyMarginBottom"
                             />
                             <HBox
@@ -186,14 +186,15 @@
                         <form:content>
                             <ScrollContainer
                                 id="scrollContainerRRD"
-                                width="100%"
-                                height="auto"
+                                height="450px"
                                 horizontal="true"
                                 vertical="true"
                                 class="sapUiTinyMarginBottom sapUiSmallMarginTop"
                             >
                                 <Table
                                     id="RRDTable_EntryForm"
+                                    inset="false"
+                                    width="150%"
                                     items="{ path: 'EntryFormDataSourceModel>/value'}"
                                     sticky="ColumnHeaders,HeaderToolbar"
                                     growing="true"
@@ -207,7 +208,7 @@
                                                 <Label text="{i18n>srno}" />
                                             </header>
                                         </Column>
-                                        <Column width="60px">
+                                        <Column width="50px">
                                             <header>
                                                 <Label
                                                     text="{i18n>salesorder}"
@@ -215,7 +216,7 @@
                                             </header>
                                         </Column>
 
-                                        <Column width="60px">
+                                        <Column width="50px">
                                             <header>
                                                 <Label
                                                     text="{i18n>billingdocument}"
@@ -239,7 +240,7 @@
                                                 />
                                             </header>
                                         </Column>
-                                        <Column width="40px">
+                                        <Column width="50px">
                                             <header>
                                                 <Label
                                                     text="{i18n>period}"
@@ -250,7 +251,63 @@
                                         <Column width="60px">
                                             <header>
                                                 <Label
-                                                    text="{i18n>proposedrr}"
+                                                    text="{i18n>proposeddr}"
+                                                    wrapping="true"
+                                                />
+                                            </header>
+                                        </Column>
+                                        <Column width="60px">
+                                            <header>
+                                                <Label
+                                                    text="{i18n>dramount}"
+                                                    wrapping="true"
+                                                />
+                                            </header>
+                                        </Column>
+                                        <Column width="50px">
+                                            <header>
+                                                <Label
+                                                    text="{i18n>differedrevenuejv}"
+                                                    wrapping="true"
+                                                />
+                                            </header>
+                                        </Column>
+                                        <Column width="60px">
+                                            <header>
+                                                <Label
+                                                    text="{i18n>differedrevenuejvamount}"
+                                                    wrapping="true"
+                                                />
+                                            </header>
+                                        </Column>
+                                        <Column width="50px">
+                                            <header>
+                                                <Label
+                                                    text="{i18n>unbilledrevenuejv}"
+                                                    wrapping="true"
+                                                />
+                                            </header>
+                                        </Column>
+                                        <Column width="60px">
+                                            <header>
+                                                <Label
+                                                    text="{i18n>unbilledrevenuejvamount}"
+                                                    wrapping="true"
+                                                />
+                                            </header>
+                                        </Column>
+                                        <Column width="50px">
+                                            <header>
+                                                <Label
+                                                    text="{i18n>unbilledreversejv}"
+                                                    wrapping="true"
+                                                />
+                                            </header>
+                                        </Column>
+                                        <Column width="60px">
+                                            <header>
+                                                <Label
+                                                    text="{i18n>unbilledreversejvamount}"
                                                     wrapping="true"
                                                 />
                                             </header>
@@ -259,22 +316,6 @@
                                             <header>
                                                 <Label
                                                     text="{i18n>rramount}"
-                                                    wrapping="true"
-                                                />
-                                            </header>
-                                        </Column>
-                                        <Column width="50px">
-                                            <header>
-                                                <Label
-                                                    text="{i18n>proposedrrjv}"
-                                                    wrapping="true"
-                                                />
-                                            </header>
-                                        </Column>
-                                        <Column width="60px">
-                                            <header>
-                                                <Label
-                                                    text="{i18n>unbilledreversejv}"
                                                     wrapping="true"
                                                 />
                                             </header>
@@ -310,31 +351,66 @@
                                                     type="Number"
                                                     value="{EntryFormDataSourceModel>Period}"
                                                     placeholder="Period"
-                                                    editable="{EntryFormDataSourceModel>EnablePeriod}"
+                                                    editable="false"
                                                     liveChange="onChangePeriod"
                                                 />
                                                 <Input
                                                     id="inptproposedrr"
                                                     type="Number"
                                                     value="{EntryFormDataSourceModel>RRAmount}"
-                                                    placeholder="Proposed RR"
-                                                    editable="{EntryFormDataSourceModel>EnableRRAmount}"
+                                                    placeholder="Proposed DR"
+                                                    editable="false"
                                                     liveChange="onChangeProposedRR"
                                                 />
                                                 <Input
                                                     id="inptrramount"
                                                     type="Number"
                                                     value="{EntryFormDataSourceModel>AmountOfRR}"
-                                                    placeholder="Proposed RR"
+                                                    placeholder="DR Amount"
                                                     editable="false"
                                                 />
                                                 <Text
+                                                id="differedrevenuejv"
                                                     text="{EntryFormDataSourceModel>ProposedJV}"
                                                     wrapping="true"
                                                 />
+                                                <Input
+                                                    id="differedrevenuejvamount"
+                                                    type="Number"
+                                                    value="{EntryFormDataSourceModel>AmountOfRR}"
+                                                    placeholder="Differed Revenue JV Amount"
+                                                    editable="false"
+                                                />
                                                 <Text
+                                                id="unbilledrevenuejv"
                                                     text="{EntryFormDataSourceModel>UnbilledJV}"
                                                     wrapping="true"
+                                                />
+                                                <Input
+                                                    id="unbilledrevenuejvamount"
+                                                    type="Number"
+                                                    value="{EntryFormDataSourceModel>AmountOfRR}"
+                                                    placeholder="Unbilled Revenue JV Amount"
+                                                    editable="false"
+                                                />
+                                                <Text
+                                                id="unbilledreversejv"
+                                                    text="{EntryFormDataSourceModel>UnbilledJV}"
+                                                    wrapping="true"
+                                                />
+                                                <Input
+                                                    id="unbilledreversejvamount"
+                                                    type="Number"
+                                                    value="{EntryFormDataSourceModel>AmountOfRR}"
+                                                    placeholder="Unbilled Reverse JV Amount"
+                                                    editable="false"
+                                                />
+                                                <Input
+                                                    id="rramount"
+                                                    type="Number"
+                                                    value="{EntryFormDataSourceModel>AmountOfRR}"
+                                                    placeholder="RR Amount"
+                                                    editable="false"
                                                 />
                                             </cells>
                                         </ColumnListItem>
