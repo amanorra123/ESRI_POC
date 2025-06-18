@@ -175,7 +175,7 @@ sap.ui.define([
 
         let url = '/sap/opu/odata4/sap/zesri_sb/srvd_a2x/sap/zesri_sd/0001/ZESRI_Data_Model';//?$filter=SalesOrder eq '024E001030'
         if (filter.length > 0) {
-          url = url + '?$filter=' + filter + '$orderby=RunDate asc'
+          url = url + '?$filter=' + filter + '&$orderby=RunDate asc'
         }else {
           url = url + '?$orderby=RunDate asc'
         }
