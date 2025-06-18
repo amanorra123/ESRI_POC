@@ -12,6 +12,7 @@
             "BillingDocument": null,
             "SalesOrder": null,
             "BillingDate": null,
+            "RunDate":null,
             "Customer": null,
             "BillValue": null,
             "Currency": null,

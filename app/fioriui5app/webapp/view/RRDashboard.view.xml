@@ -216,13 +216,14 @@
                                             </header>
                                         </Column>
 
-                                        <Column width="50px">
+                                        <Column width="60px">
                                             <header>
                                                 <Label
                                                     text="{i18n>billingdocument}"
                                                 />
                                             </header>
                                         </Column>
+                                        
                                         <Column width="50px">
                                             <header>
                                                 <Label
@@ -231,7 +232,22 @@
                                                 />
                                             </header>
                                         </Column>
-
+                                        <Column width="50px">
+                                            <header>
+                                                <Label
+                                                    text="{i18n>rundate}"
+                                                    wrapping="true"
+                                                />
+                                            </header>
+                                        </Column>
+                                        <Column width="50px">
+                                            <header>
+                                                <Label
+                                                    text="{i18n>billingvalue}"
+                                                    wrapping="true"
+                                                />
+                                            </header>
+                                        </Column>
                                         <Column width="50px">
                                             <header>
                                                 <Label
@@ -340,6 +356,10 @@
                                                 />
                                                 <Text
                                                     text="{EntryFormDataSourceModel>BillingDate}"
+                                                    wrapping="true"
+                                                />
+                                                <Text
+                                                    text="{EntryFormDataSourceModel>RunDate}"
                                                     wrapping="true"
                                                 />
                                                 <Text
