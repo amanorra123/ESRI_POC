@@ -248,14 +248,6 @@
                                                 />
                                             </header>
                                         </Column>
-                                        <!-- <Column width="50px">
-                                            <header>
-                                                <Label
-                                                    text="{i18n>billingvalue}"
-                                                    wrapping="true"
-                                                />
-                                            </header>
-                                        </Column> -->
                                         <Column width="50px">
                                             <header>
                                                 <Label
